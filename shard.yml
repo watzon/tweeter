@@ -1,0 +1,24 @@
+name: twitstle
+version: 0.1.0
+
+authors:
+  - Chris Watson <chris@watzon.me>
+
+crystal: 0.24.1
+
+dependencies:
+  halite:
+    github: icyleaf/halite
+  easy_oauth:
+    github: watzon/easy_oauth
+
+development_dependencies:
+  spec2:
+    github: watzon/spec2.cr
+  webmock:
+    github: manastech/webmock.cr
+    branch: master
+  timecop:
+    github: TobiasGSmollett/timecop.cr
+
+license: MIT
