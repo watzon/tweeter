@@ -12,15 +12,20 @@ module Tweeter::REST::Utils
 
   def extract_id(object)
     case object
-    when ::Int32, ::Int64
+    when ::Int
       object
     when ::String
-      object.split("/").last.to_i
+      object.split("/").last.to_i64
     when URI
-      object.path.split("/").last.to_i
+      object.path.not_nil!.split("/").last.to_i64
     when Tweeter::Identity
       object.id
     end
+  end
+
+  def normalize_options(options)
+    return {} of String => String if options.nil?
+    options.to_h.transform_keys(&.to_s)
   end
 
   def get(path : String, options = nil)
@@ -31,10 +36,10 @@ module Tweeter::REST::Utils
     request("get", path, options, klass)
   end
 
-  def get(path : String, options : Hash(String, String), collection_name : String, klass)
+  def get(path : String, options : Hash(String, String), collection_name : String | Symbol, klass)
     merge_default_cursor!(options)
     request = Tweeter::REST::Request.new(self, "get", path, options)
-    Tweeter::Cursor.new(collection_name, klass, request)
+    Tweeter::Cursor.new(collection_name.to_s, klass, request)
   end
 
   def post(path : String, options = nil)
@@ -102,8 +107,8 @@ module Tweeter::REST::Utils
     screen_names = [] of String
     users.each do |user|
       case user
-      when Int           then user_ids << user
-      when Tweeter::User then user_ids << user.id
+      when Int           then user_ids << user.to_i64
+      when Tweeter::User then user_ids << user.id.to_i64
       when String        then screen_names << user
       when URI           then screen_names << user.path.not_nil!.split('/').last
       end

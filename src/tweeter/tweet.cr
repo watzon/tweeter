@@ -10,7 +10,7 @@ module Tweeter
   class Tweet < Tweeter::Identity
     PROPERTIES = {
       id_str:                    {type: String, nilable: true},
-      created_at:                {type: Time, nilable: true, converter: Time::StringConverter},
+      created_at:                {type: Time, nilable: true, converter: Time::ISO_8601_Converter},
       text:                      {type: String, nilable: true},
       truncated:                 {type: Bool, nilable: true},
       entities:                  {type: Entities, nilable: true},

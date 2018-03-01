@@ -4,7 +4,7 @@ module Time::ISO_8601_Converter
   end
 end
 
-module URI::StringConverter
+class URI::StringConverter
   def self.to_json(value : URI, json : JSON::Builder)
     json.string(value.to_s)
   end

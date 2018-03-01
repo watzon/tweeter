@@ -46,7 +46,7 @@ module Tweeter
     private def attrs=(attrs)
       @attrs = attrs
       @attrs.fetch(@key, [] of JSON::Type).as(Array(JSON::Type)).each do |element|
-        @collection << @klass.new(element.as(Int64))
+        @collection << @klass.from_json(element.to_json)
       end
       @attrs
     end

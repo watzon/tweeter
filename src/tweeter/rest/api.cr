@@ -18,5 +18,6 @@ require "./users"
 module Tweeter::REST::API
   include Tweeter::REST::OAuth
   include Tweeter::REST::Users
+  include Tweeter::REST::Tweets
   include Tweeter::REST::FriendsAndFollowers
 end

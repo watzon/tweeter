@@ -4,7 +4,7 @@ module Time::ISO_8601_Converter
   end
 end
 
-module URI::StringConverter
+class URI::StringConverter
   def self.from_json(value : JSON::PullParser) : URI
     URI.parse(value.read_string)
   end

@@ -2,7 +2,7 @@ require "json"
 
 module Tweeter
   abstract class Base
-    macro create_initializer(_properties_)
+    macro create_initializer(_properties_, debugger = false)
       # This flag makes sure that we know this class's initializer
       # was created with this macro
       MACRO_INITIALIZED = true
@@ -78,11 +78,23 @@ module Tweeter
         )
         {% for key, value in _properties_ %}
           {% if value[:mustbe] || value[:mustbe] == false %}
-            {{key.id}} = {{value[:mustbe]}}
+          @{{key.id}} = {{value[:mustbe]}}
+          {% elsif value[:type].is_a?(Path) && value[:type].resolve? %}
+            {% kind = value[:type].resolve %}
+            {% if kind.constant("MACRO_INITIALIZED") %}
+              if {{key.id}}.is_a?(NamedTuple)
+                {{key.id}} = {{kind.id}}.new({{key.id}})
+              end
+            {% end %}
+            @{{key.id}} = {{key.id}}
+          {% else %}
+            @{{key.id}} = {{key.id}}
           {% end %}
-
-          @{{key.id}} = {{key.id}}
         {% end %}
+      end
+
+      def self.new(other : {{@type.id}})
+        other.dup
       end
 
       def self.new(properties : NamedTuple)
@@ -91,6 +103,10 @@ module Tweeter
 
       # Now wrap `JSON.mapping`
       JSON.mapping({{_properties_}})
+
+      {% if debugger %}
+       {{debug}}
+      {% end %}
     end
 
     macro create_initializer(**_properties_)
