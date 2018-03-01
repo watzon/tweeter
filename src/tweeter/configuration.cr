@@ -7,7 +7,7 @@ module Tweeter
       dm_text_character_limit:       {type: Int32, nilable: true},
       max_media_per_upload:          {type: Int32, nilable: true},
       photo_size_limit:              {type: Int32, nilable: true},
-      photo_sizes:                   {type: Array(PhotoSize), nilable: true},
+      photo_sizes:                   {type: Hash(String, PhotoSize), nilable: true},
       short_url_length:              {type: Int32, nilable: true},
       short_url_length_https:        {type: Int32, nilable: true},
       non_username_paths:            {type: Array(String), nilable: true},
