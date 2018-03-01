@@ -44,6 +44,7 @@ module Tweeter
         new_friends = users(*args).map(&.id.to_i64.abs)
         follow!(new_friends - existing_friends, arguments.options)
       end
+
       alias_method :create_friendship, :follow
 
       def follow!(*args)
@@ -52,6 +53,7 @@ module Tweeter
           post("/1.1/friendships/create.json", merge_user(arguments.options, user), Tweeter::User)
         end.compact
       end
+
       alias_method :create_friendship!, :follow!
 
       def unfollow(*args)

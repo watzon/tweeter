@@ -40,6 +40,7 @@ module Tweeter::REST::Tweets
       post("/1.1/statuses/destroy/#{extract_id(tweet)}.json", arguments.options, Tweeter::Tweet)
     end
   end
+
   alias_method :destroy_tweet, :destroy_status
 
   def update(status, options = nil)
@@ -78,7 +79,7 @@ module Tweeter::REST::Tweets
     media_ids = array_wrap(media).map do |medium|
       upload(medium)[:media_id]
     end
-    update!(status, options.merge({ "media_ids" => media_ids.join(",") }))
+    update!(status, options.merge({"media_ids" => media_ids.join(",")}))
   end
 
   def oembed(tweet, options = nil)
@@ -112,7 +113,6 @@ module Tweeter::REST::Tweets
   end
 
   private def upload(media)
-
   end
 
   private def array_wrap(object)
