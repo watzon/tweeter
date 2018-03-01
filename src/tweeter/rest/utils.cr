@@ -10,6 +10,8 @@ module Tweeter::REST::Utils
 
   alias UserArgs = Int64 | String | URI | Tweeter::User
 
+  @@user_id : Int64?
+
   def extract_id(object)
     case object
     when ::Int
@@ -23,7 +25,7 @@ module Tweeter::REST::Utils
     end
   end
 
-  def normalize_options(options)
+  def normalize_options(options = nil)
     return {} of String => String if options.nil?
     options.to_h.transform_keys(&.to_s)
   end
@@ -62,6 +64,14 @@ module Tweeter::REST::Utils
   # def request(method : String, path : String, file : File, options)
   #   Tweeter::REST::Request.new(self, "multipart_post", path, options.merge({"file" => file})).perform
   # end
+
+  def user_id
+    @@user_id ||= verify_credentials({skip_status: true}).id
+  end
+
+  def user_id?
+    !!@user_id
+  end
 
   def merge_default_cursor!(options)
     options["cursor"] = DEFAULT_CURSOR.to_s unless options["cursor"]?

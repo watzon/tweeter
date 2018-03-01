@@ -14,20 +14,22 @@ module Tweeter::REST::Users
   MAX_USERS_PER_REQUEST = 100
 
   def settings(options = nil)
+    options = normalize_options(options)
     method = options.size.zero? ? "get" : "post"
     request(method, "/1.1/account/settings.json", options, Tweeter::Settings)
   end
 
   def verify_credentials(options = nil)
-    get("/1.1/account/verify_credentials.json", options, Tweeter::User)
+    get("/1.1/account/verify_credentials.json", normalize_options(options), Tweeter::User)
   end
 
   def update_delivery_device(device, options = nil)
+    options = normalize_options(options)
     post("/1.1/account/update_delivery_device.json", options.merge({"device" => device}), Tweeter::User)
   end
 
   def update_profile(options = nil)
-    post("/1.1/account/update_profile.json", options, Tweeter::User)
+    post("/1.1/account/update_profile.json", normalize_options(options), Tweeter::User)
   end
 
   # def update_profile_background_image(image : File, options = nil)
@@ -41,11 +43,11 @@ module Tweeter::REST::Users
   # end
 
   def blocked(options = nil)
-    get("/1.1/blocks/list.json", options, "users", Tweeter::User)
+    get("/1.1/blocks/list.json", normalize_options(options), "users", Tweeter::User)
   end
 
   def blocked_ids(options = nil)
-    get("/1.1/blocks/list.json", options, "ids")
+    get("/1.1/blocks/list.json", normalize_options(options), "ids")
   end
 
   def blocked?(user, options = nil)
@@ -55,12 +57,14 @@ module Tweeter::REST::Users
 
   def block(user, options = nil)
     user_id = get_user_id(user)
+    options = normalize_options(options)
     options.merge!({user_id: user_id})
     post("/1.1/blocks/create.json", options, Tweeter::User)
   end
 
   def unblock(user, options = nil)
     user_id = get_user_id(user)
+    options = normalize_options(options)
     options.merge!({user_id: user_id})
     post("/1.1/blocks/destroy.json", options, Tweeter::User)
   end
@@ -84,7 +88,7 @@ module Tweeter::REST::Users
   end
 
   def user?(user, options = nil)
-    options = options.dup
+    options = normalize_options(options)
     merge_user!(options, user)
     get("/1.1/users/show.json", options)
     true
@@ -93,24 +97,25 @@ module Tweeter::REST::Users
   end
 
   def user_search(query, options = nil)
-    options = options.dup
+    options = normalize_options(options)
     get("/1.1/users/search.json", options.merge({"q" => query}), Array(Tweeter::User))
   end
 
   def contributees(options = nil)
-    get("/1.1/users/contributees.json", options, Array(Tweeter::User))
+    get("/1.1/users/contributees.json", normalize_options(options), Array(Tweeter::User))
   end
 
   def contributors(options = nil)
-    get("/1.1/users/contributors.json", options, Array(Tweeter::User))
+    get("/1.1/users/contributors.json", normalize_options(options), Array(Tweeter::User))
   end
 
   def remove_profile_banner(options = nil)
-    post("/1.1/remove_profile_banner.json", options)
+    post("/1.1/remove_profile_banner.json", normalize_options(options))
     true
   end
 
   def update_profile_banner(banner, options = nil)
+    options = normalize_options(options)
     post("/1.1/account/update_profile_banner.json", options.merge({"banner" => banner}))
     true
   end
@@ -122,15 +127,15 @@ module Tweeter::REST::Users
   # end
 
   def mute(options = nil)
-    post("/1.1/mutes/users/create.json", options, Tweeter::User)
+    post("/1.1/mutes/users/create.json", normalize_options(options), Tweeter::User)
   end
 
   def unmute(options = nil)
-    post("/1.1/mutes/users/destroy.json", options, Tweeter::User)
+    post("/1.1/mutes/users/destroy.json", normalize_options(options), Tweeter::User)
   end
 
   def muted(options = nil)
-    post("/1.1/mutes/users/list.json", options, Array(Tweeter::User))
+    post("/1.1/mutes/users/list.json", normalize_options(options), Array(Tweeter::User))
   end
 
   def muted_ids(*args)
