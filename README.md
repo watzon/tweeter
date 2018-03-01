@@ -26,7 +26,7 @@ Configuration for Tweeter is very similar to that of the Twitter Ruby Gem. The T
 
 You can pass the values you receive as a block to `Tweeter::REST::Client.new`.
 
-```
+```crystal
 client = Tweeter::REST::Client.new do |config|
   config.consumer_key        = "YOUR_CONSUMER_KEY"
   config.consumer_secret     = "YOUR_CONSUMER_SECRET"
