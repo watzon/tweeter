@@ -4,6 +4,12 @@ module Time::ISO_8601_Converter
   end
 end
 
+module Time::TrendConverter
+  def self.from_json(value : JSON::PullParser) : Time
+    Time.parse(value.read_string, "%FT%TZ", Time::Kind::Utc)
+  end
+end
+
 class URI::StringConverter
   def self.from_json(value : JSON::PullParser) : URI
     URI.parse(value.read_string)

@@ -19,6 +19,7 @@ module Tweeter::REST::API
   include Tweeter::REST::FriendsAndFollowers
   include Tweeter::REST::OAuth
   include Tweeter::REST::Timelines
+  include Tweeter::REST::Trends
   include Tweeter::REST::Tweets
   include Tweeter::REST::Undocumented
   include Tweeter::REST::Users
