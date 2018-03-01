@@ -15,6 +15,7 @@ dependencies:
 development_dependencies:
   spec2:
     github: watzon/spec2.cr
+    branch: master
   webmock:
     github: manastech/webmock.cr
     branch: master
