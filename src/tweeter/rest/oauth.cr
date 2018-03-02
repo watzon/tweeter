@@ -7,14 +7,22 @@ module Tweeter::REST
     extend self
     include Tweeter::REST::Utils
 
-    def token(options = {} of String => String)
-      options = options.dup
+    def token(options = nil)
+      options = normalize_options(options)
       options["bearer_token_request"] = "true"
       options["grant_type"] ||= "client_credentials"
       url = "https://api.twitter.com/oauth2/token"
       headers = Tweeter::Headers.new(self, "post", url, options).request_headers
       response = Halite.headers(headers).post(url, form: options)
       response.parse["access_token"].as_s
+    end
+
+    def request_token(options = nil)
+      options = normalize_options(options)
+      url = "https://api.twitter.com/oauth/request_token"
+      auth_header = Tweeter::Headers.new(self, "post", url, options).oauth_auth_header.to_s
+      response = Halite.headers(authorization: auth_header).post(url, params: options).to_s
+      response.split("&").map(&.split("=")).to_h
     end
 
     def invalidate_token(access_token, options = {} of String => String)
@@ -27,7 +35,7 @@ module Tweeter::REST
       options = {"x_auth_mode" => "reverse_auth"}
       url = "https://api.twitter.com/oauth/request_token"
       auth_header = Tweeter::Headers.new(self, "post", url, options).oauth_auth_header.to_s
-      Halite.header(authorization: auth_header).post(url, params: options).to_s
+      Halite.headers(authorization: auth_header).post(url, params: options).to_s
     end
   end
 end
