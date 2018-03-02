@@ -25,6 +25,7 @@ module Tweeter::REST::Favorites
       end
     end.compact
   end
+
   alias_method :destroy_favorite, :unfavorite
 
   def unfavorite!(*args)
@@ -33,6 +34,7 @@ module Tweeter::REST::Favorites
       post("/1.1/favorites/destroy.json", arguments.options.merge({"id" => extract_id(tweet)}), Tweeter::Tweet)
     end
   end
+
   alias_method :destroy_favorite!, :unfavorite!
 
   def favorite(*args)
@@ -46,6 +48,7 @@ module Tweeter::REST::Favorites
       end
     end.compact
   end
+
   alias_method :fav, :favorite
   alias_method :fave, :favorite
 
@@ -55,6 +58,7 @@ module Tweeter::REST::Favorites
       post("/1.1/favorites/create.json", arguments.options.merge({"id" => extract_id(tweet)}), Tweeter::Tweet)
     end.compact
   end
+
   alias_method :fav!, :favorite!
   alias_method :fave!, :favorite!
 end
