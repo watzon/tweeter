@@ -49,7 +49,7 @@ The project is still in development and until it has a stable API I will refrain
 - [x] Cursor Support
 - [ ] Streaming Client
 - [ ] REST Client
-  - [ ] Direct Messages (__in progress__)
+  - [x] Direct Messages (__sending not working yet__)
   - [ ] Favorites
   - [x] Friends and Followers
   - [x] Help
@@ -57,7 +57,7 @@ The project is still in development and until it has a stable API I will refrain
   - [x] OAuth
   - [ ] Places and Geo
   - [ ] Saved Searches
-  - [ ] Search
+  - [x] Search
   - [ ] Spam Reporting
   - [ ] Suggested Users
   - [x] Timelines
