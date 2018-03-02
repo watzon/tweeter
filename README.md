@@ -43,9 +43,33 @@ The project is still in development and until it has a stable API I will refrain
 
 ## Development
 
-Please make sure you have the latest version of Crystal installed before doing any development. As of now this shard is updated to work with `Crystal 0.24.1`. Please also run `crystal tool format` before commiting.
+### v1.0.0 Progress
+
+- [x] Authentication
+- [x] Cursor Support
+- [ ] Streaming Client
+- [ ] REST Client
+  - [ ] Direct Messages (__in progress__)
+  - [ ] Favorites
+  - [x] Friends and Followers
+  - [x] Help
+  - [ ] Lists
+  - [x] OAuth
+  - [ ] Places and Geo
+  - [ ] Saved Searches
+  - [ ] Search
+  - [ ] Spam Reporting
+  - [ ] Suggested Users
+  - [x] Timelines
+  - [x] Trends
+  - [x] Tweets
+  - [x] Undocumented Endpoints
+  - [x] Users
+- [ ] Complete Specs
 
 ## Contributing
+
+Please make sure you have the latest version of Crystal installed before doing any development. As of now this shard is updated to work with `Crystal 0.24.1`. Please also run `crystal tool format` & `crystal spec` before commiting.
 
 1. Fork it ( https://github.com/watzon/tweeter/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
