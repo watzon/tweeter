@@ -15,3 +15,9 @@ class URI::StringConverter
     URI.parse(value.read_string)
   end
 end
+
+struct Int::StringConverter
+  def self.from_json(value : JSON::PullParser) : Int64
+    value.read_string.to_i64
+  end
+end

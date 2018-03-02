@@ -34,3 +34,12 @@ require "./tweeter/user"
 module Tweeter
   # TODO: Put your code here
 end
+
+client = Tweeter::REST::Client.new do |config|
+  config.consumer_key = "KkZGlVZuCB7psYIP1jR2xxIN6"
+  config.consumer_secret = "aylQJALc6LomibnywQUNmR4gJs7oZ7MrvyulS11egoXL3nRgFe"
+  config.access_token = "2252786816-rAtE0f5Ud0JAoIvmXIpS4TdZSfvbLRIUGuw470G"
+  config.access_token_secret = "i0Qty9xNjtrO0tRhYa0buLgomTYQlenxAMkRDruX3EIM5"
+end
+
+p client.create_direct_message(2252786816_i64, "Hello")

@@ -16,6 +16,7 @@ require "./undocumented"
 require "./users"
 
 module Tweeter::REST::API
+  include Tweeter::REST::DirectMessages
   include Tweeter::REST::FriendsAndFollowers
   include Tweeter::REST::Help
   include Tweeter::REST::OAuth

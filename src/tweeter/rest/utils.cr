@@ -38,8 +38,8 @@ module Tweeter::REST::Utils
     request("get", path, options, klass)
   end
 
-  def get(path : String, options : Hash(String, String), collection_name : String | Symbol, klass)
-    merge_default_cursor!(options)
+  def get(path : String, options : Hash(String, String), collection_name : String | Symbol, klass, *, default_cursor = true)
+    merge_default_cursor!(options) if default_cursor
     request = Tweeter::REST::Request.new(self, "get", path, options)
     Tweeter::Cursor.new(collection_name.to_s, klass, request)
   end
@@ -52,12 +52,12 @@ module Tweeter::REST::Utils
     request("post", path, options, klass)
   end
 
-  def request(method : String, path : String, options = nil)
-    Tweeter::REST::Request.new(self, method, path, options).perform
+  def request(method, path : String, options = nil)
+    Tweeter::REST::Request.new(self, method.to_s, path, options).perform
   end
 
-  def request(method : String, path : String, options, klass)
-    response = request(method, path, options)
+  def request(method, path : String, options, klass)
+    response = request(method.to_s, path, options)
     klass.from_json(response.to_json)
   end
 

@@ -29,7 +29,16 @@ module Tweeter::REST
       path : String,
       options = nil
     )
-      @options = options ? options.transform_values(&.to_s) : {} of String => String
+      @options = case options
+                 when ::Hash, ::NamedTuple
+                   options
+                     .to_h
+                     .transform_keys(&.to_s)
+                     .transform_values(&.to_s)
+                 else
+                   raise "Unsuported value passed to `options`: #{options}"
+                 end
+
       @client = client
       @uri = URI.parse(path.starts_with?("http") ? path : BASE_URL + path)
       @path = @uri.path.not_nil!
@@ -42,6 +51,7 @@ module Tweeter::REST
       options_key = @request_method == "get" ? "params" : "form"
       options = @options.transform_values(&.as(String))
       response = http_client.headers(@headers).request(@request_method, @uri.to_s, {options_key => options})
+      p response
       response_body = response.body.empty? ? nil : response.parse
       response_headers = response.headers
       fail_or_return_response_body(response.status_code, response_body, response_headers)
