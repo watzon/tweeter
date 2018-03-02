@@ -46,7 +46,7 @@ module Tweeter::REST::Tweets
   def update(status, options = nil)
     update!(status, options)
   rescue Tweeter::Error::DuplicateStatus
-    user_timeline(count: 1).first
+    user_timeline({count: 1}).first
   end
 
   def update!(status, options = nil)
