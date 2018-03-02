@@ -34,3 +34,12 @@ require "./tweeter/user"
 module Tweeter
   # TODO: Put your code here
 end
+
+client = Tweeter::REST::Client.new do |config|
+  config.consumer_key = "KkZGlVZuCB7psYIP1jR2xxIN6"
+  config.consumer_secret = "aylQJALc6LomibnywQUNmR4gJs7oZ7MrvyulS11egoXL3nRgFe"
+  config.access_token = "2252786816-GCsP8yHLzs2DhwDz4AHHSAXloSY5iD4uhoZjAK5"
+  config.access_token_secret = "XER7jm3FTFVKNgqpfGW2m4uRjYDOfli4qf4Ec8XcAsCet"
+end
+
+p client.search("to:justinbieber marry me", {result_type: "recent"}).take(3).map { |tweet| "#{tweet.user.not_nil!.screen_name}: #{tweet.text}" }

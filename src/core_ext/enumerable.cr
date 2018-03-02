@@ -4,7 +4,7 @@ module Enumerable(T)
 
     array = Array(T).new
     each_with_index do |e, i|
-      array << e if i <= count
+      array << e if i < count
     end
     array
   end
