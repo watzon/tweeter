@@ -50,7 +50,7 @@ The project is still in development and until it has a stable API I will refrain
 - [ ] Streaming Client
 - [ ] REST Client
   - [x] Direct Messages (__sending not working yet__)
-  - [ ] Favorites
+  - [x] Favorites
   - [x] Friends and Followers
   - [x] Help
   - [ ] Lists
