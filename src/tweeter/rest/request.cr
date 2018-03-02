@@ -25,7 +25,7 @@ module Tweeter::REST
 
     def initialize(
       client : Tweeter::Client,
-      request_method : String,
+      request_method : Symbol | String,
       path : String,
       options = nil
     )
@@ -42,7 +42,7 @@ module Tweeter::REST
       @client = client
       @uri = URI.parse(path.starts_with?("http") ? path : BASE_URL + path)
       @path = @uri.path.not_nil!
-      @request_method = request_method
+      @request_method = request_method.to_s
 
       set_multipart_options!(request_method, @options)
     end
@@ -51,7 +51,6 @@ module Tweeter::REST
       options_key = @request_method == "get" ? "params" : "form"
       options = @options.transform_values(&.as(String))
       response = http_client.headers(@headers).request(@request_method, @uri.to_s, {options_key => options})
-      p response
       response_body = response.body.empty? ? nil : response.parse
       response_headers = response.headers
       fail_or_return_response_body(response.status_code, response_body, response_headers)

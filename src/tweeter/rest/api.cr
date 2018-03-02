@@ -20,6 +20,7 @@ module Tweeter::REST::API
   include Tweeter::REST::FriendsAndFollowers
   include Tweeter::REST::Help
   include Tweeter::REST::OAuth
+  include Tweeter::REST::Search
   include Tweeter::REST::Timelines
   include Tweeter::REST::Trends
   include Tweeter::REST::Tweets
