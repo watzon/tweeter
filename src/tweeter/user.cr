@@ -6,7 +6,6 @@ require "./entity/url"
 module Tweeter
   class User < Tweeter::BasicUser
     PROPERTIES = {
-      id_str:      {type: String, nilable: true},
       name:        {type: String, nilable: true},
       location:    {type: String, nilable: true},
       description: {type: String, nilable: true},
