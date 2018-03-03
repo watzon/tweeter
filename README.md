@@ -1,6 +1,6 @@
 # Tweeter
 
-[![Travis](https://img.shields.io/travis/watzon/tweeter.svg)](https://travis.org/watzon/tweeter) ![Dependencies](https://shards.rocks/badge/github/veelenga/ameba/status.svg) ![Github search hit counter](https://img.shields.io/github/search/watzon/tweeter/goto.svg) ![license](https://img.shields.io/github/license/watzon/tweeter.svg)
+[![Travis](https://img.shields.io/travis/watzon/tweeter.svg)](https://travis.org/watzon/tweeter) ![Dependencies](https://shards.rocks/badge/github/watzon/tweeter/status.svg) ![Github search hit counter](https://img.shields.io/github/search/watzon/tweeter/goto.svg) ![license](https://img.shields.io/github/license/watzon/tweeter.svg)
 
 Tweeter is a Crystal interface to the Twitter API and is heavily based off the wonderfully thurough [Twitter Ruby Gem](https://github.com/sferik/twitter) by [sferik](https://github.com/sferik).
 
