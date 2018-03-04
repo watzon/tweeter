@@ -34,3 +34,13 @@ require "./tweeter/user"
 module Tweeter
   # TODO: Put your code here
 end
+
+client = Tweeter::REST::Client.new do |config|
+  config.consumer_key        = "NUkIxxzC80q0tjhX9zSC5N0x1"
+  config.consumer_secret     = "AxNoHDqG1yOje7Q2s13PM2q28yaZNbGkB0zGhWqsjCLvPSstrZ"
+  config.access_token        = "2252786816-W6EpFY930xp5w9DAeq9yFCzEp0SWMMKL6doOix8"
+  config.access_token_secret = "mhsMdrZlA0lp4Fn5xNGA10Wyyjh1jwBcZKWzR8lcdk3pe"
+end
+
+memberships = client.memberships.to_a
+p client.list_subscribers(memberships[1]).size

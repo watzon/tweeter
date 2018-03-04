@@ -10,6 +10,15 @@ module Time::TrendConverter
   end
 end
 
+struct Time::ParserConverter
+  def initialize(@format : String)
+  end
+
+  def from_json(value : JSON::PullParser) : Time
+    Time.parse(value.read_string, @format, Time::Kind::Utc)
+  end
+end
+
 class URI::StringConverter
   def self.from_json(value : JSON::PullParser) : URI
     URI.parse(value.read_string)
